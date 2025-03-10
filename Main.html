@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tab Layout Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .tabs {
+            display: flex;
+            cursor: pointer;
+        }
+        .tab {
+            padding: 10px 20px;
+            background: #f1f1f1;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            margin-right: 5px;
+        }
+        .tab.active {
+            background: #fff;
+            border-top: 2px solid #007bff;
+        }
+        .tab-content {
+            border: 1px solid #ccc;
+            padding: 20px;
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="tabs">
+        <div class="tab active" data-tab="main">Main</div>
+        <div class="tab" data-tab="proxy1">Proxy 1</div>
+        <div class="tab" data-tab="proxy2">Proxy 2</div>
+    </div>
+    <div class="tab-content active" id="main">
+        <h2>Main Content</h2>
+        <p>This is the main content area.</p>
+    </div>
+    <div class="tab-content" id="proxy1">
+        <h2>Proxy 1 Content</h2>
+        <p>This is the content for Proxy 1.</p>
+    </div>
+    <div class="tab-content" id="proxy2">
+        <h2>Proxy 2 Content</h2>
+        <p>This is the content for Proxy 2.</p>
+    </div>
+
+    <script>
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const target = tab.getAttribute('data-tab');
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === target) {
+                        content.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
